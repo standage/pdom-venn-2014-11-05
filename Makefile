@@ -8,6 +8,9 @@ BLASTTHREADS=1
 
 all:		allVID
 
+clean:		
+		rm -rf blastp-P* vID-P* ID-P* msb-P* *.log *MRNA* *PRT* Pc* Pd* Pm*
+
 #-------------------------------------------------------------------------------
 # Download transcript assemblies
 #-------------------------------------------------------------------------------

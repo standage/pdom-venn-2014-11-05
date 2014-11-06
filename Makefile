@@ -6,7 +6,7 @@
 SHELL=bash
 BLASTTHREADS=1
 
-all:		allVID
+all:		pdom-venn.png
 
 clean:		
 		rm -rf blastp-P* vID-P* ID-P* msb-P* *.log *MRNA* *PRT* Pc* Pd* Pm*
@@ -80,3 +80,9 @@ vID-Pd:		allMSB ID-PdPRT
 vID-Pm:		allMSB ID-PmPRT
 		./run-diff.sh Pm Pc Pd
 
+#-------------------------------------------------------------------------------
+# Make the Venn diagram graphic
+#-------------------------------------------------------------------------------
+
+pdom-venn.png:	allVID make-rvenn.py
+		python make-rvenn.py | Rscript -

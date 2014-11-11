@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 #
-# FIXME
-# Volker Brendel,  2013
+# Integrate annotation, transcriptome-based efforts to identify TRGs
 # Daniel Standage, 2014
 SHELL=bash
 BLASTTHREADS=1

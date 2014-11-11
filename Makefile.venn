@@ -6,7 +6,7 @@
 SHELL=bash
 BLASTTHREADS=1
 
-all:		pdom-venn.png
+all:		pdom-venn.png pdom-tsa-r1.2-unmatched-pep.fa
 
 clean:		
 		rm -rf blastp-P* vID-P* ID-P* msb-P* *.log *MRNA* *PRT* Pc* Pd* Pm*
@@ -79,6 +79,19 @@ vID-Pd:		allMSB ID-PdPRT
 		./run-diff.sh Pd Pc Pm
 vID-Pm:		allMSB ID-PmPRT
 		./run-diff.sh Pm Pc Pd
+
+pdom-tsa-r1.2.fa:	
+			iget /iplant/home/standage/Polistes_dominula/r1.2/transcript-assembly/$@.gz                                
+			gunzip $@.gz
+
+pdom-tsa-r1.2-unmatched-pep.txt:	vID-Pd PdPRT pdom-tsa-r1.2.fa
+					python id-resolve.py vID-PdPcPm \
+					    PdPRT \
+					    pdom-tsa-r1.2.fa \
+					    > $@
+
+pdom-tsa-r1.2-unmatched-pep.fa:		pdom-tsa-r1.2-unmatched-pep.txt pdom-tsa-r1.2.fa
+					select-seq $^ > $@
 
 #-------------------------------------------------------------------------------
 # Make the Venn diagram graphic

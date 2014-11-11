@@ -28,7 +28,7 @@ pdom-tsa-aligned-unmatched-loci.txt:	pdom-loci-r1.2.gff3 pdom-tsa-aligned-unmatc
 pdom-loci-r1.2.gff3:		
 					iget $(IRODS_DIR)/interval-loci/$@
 
-pdom-tsa-aligned-unmatched.gff3:	pdom-tsa-unmatched-pep.txt pdom-tsa-masked-filtered.gff3
+pdom-tsa-aligned-unmatched.gff3:	pdom-tsa-r1.2-unmatched-pep.txt pdom-tsa-masked-filtered.gff3
 					python align-keep.py $^ > $@
 
 pdom-tsa-masked-filtered.gff3:	
@@ -38,8 +38,7 @@ pdom-tsa-r1.2.fa:
 				iget $(IRODS_DIR)/transcript-assembly/$@.gz
 				gunzip $@.gz
 
-pdom-tsa-unmatched-pep.txt:	pdom-tsa-r1.2.fa vID-PdPcPm PdPRT
-				python id-resolve.py vID-PdPcPm PdPRT pdom-tsa-r1.2.fa > $@
-
+pdom-tsa-r1.2-unmatched-pep.txt:	
+					iget $(IRODS_DIR)/transcript-assembly/$@
 clean:				
 				rm -f pdom-loci-r1.2*.txt pdom-tsa*.txt pdom-tsa*.gff3 pdom-r1.2-no-anm-hits* pdom-loci-r1.2.fa pdom-loci-r1.2.gff3 pdom-tsa-r1.2.fa
